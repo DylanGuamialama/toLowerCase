@@ -35,9 +35,12 @@ public class Ejemplo2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        LblTitulo.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        LblTitulo.setForeground(new java.awt.Color(255, 0, 0));
         LblTitulo.setText("toLowerCase");
 
-        lblIngresar.setText("INGRESE UNA ORACION");
+        lblIngresar.setForeground(new java.awt.Color(51, 51, 255));
+        lblIngresar.setText("INGRESE UNA PALABRA O ORACION");
 
         txtOracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,6 +48,8 @@ public class Ejemplo2 extends javax.swing.JFrame {
             }
         });
 
+        BttnValidar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BttnValidar.setForeground(new java.awt.Color(51, 255, 51));
         BttnValidar.setText("Validar");
         BttnValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,33 +64,31 @@ public class Ejemplo2 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(lblIngresar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addGap(147, 147, 147)
+                        .addComponent(LblTitulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(lblIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
                         .addComponent(txtOracion, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(163, 163, 163)
-                                .addComponent(BttnValidar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(147, 147, 147)
-                                .addComponent(LblTitulo)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(120, 120, 120)
+                        .addComponent(BttnValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(LblTitulo)
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblIngresar)
-                    .addComponent(txtOracion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(BttnValidar)
-                .addGap(54, 54, 54))
+                .addGap(38, 38, 38)
+                .addComponent(lblIngresar)
+                .addGap(31, 31, 31)
+                .addComponent(txtOracion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(BttnValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -96,15 +99,40 @@ public class Ejemplo2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtOracionActionPerformed
 
     private void BttnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BttnValidarActionPerformed
-             
+
         String oracion=txtOracion.getText();
         this.cambiaroracion(oracion);        
     }//GEN-LAST:event_BttnValidarActionPerformed
 
     
     public void cambiaroracion (String oracion){
-     String oracionEnMinusculas = oracion.toLowerCase(); 
-    JOptionPane.showMessageDialog(null, "Oración en minúsculas:"+oracionEnMinusculas);   
+ if (oracion.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "La oración no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Sale del método si la validación no pasa
+     }
+
+    // Validar que la cadena no contenga números
+     if (contieneNumeros(oracion)) {
+        JOptionPane.showMessageDialog(null, "La oración no puede contener números", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Sale del método si la validación no pasa
+     }
+
+    // Convertir la oración a minúsculas
+    String oracionEnMinusculas = oracion.toLowerCase();
+    
+    // Hacer lo que necesites con la oración en minúsculas
+    // Por ejemplo, podrías mostrarla en un cuadro de diálogo
+    JOptionPane.showMessageDialog(null, "" + oracionEnMinusculas);
+}
+
+private boolean contieneNumeros(String cadena) {
+    // Verificar si la cadena contiene algún dígito
+    for (char c : cadena.toCharArray()) {
+        if (Character.isDigit(c)) {
+            return true; // La cadena contiene al menos un dígito
+        }
+    }
+    return false;  
     }
     
     
