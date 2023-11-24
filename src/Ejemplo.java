@@ -96,8 +96,21 @@ public class Ejemplo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnValidarActionPerformed
 
     public void cambiaraminuscula (String texto){
+        int mayusculas = 0;
+        int minusculas = 0;
+        for (int i = 0; i < texto.length(); i++) {
+            char caracter = texto.charAt(i);
+            char caracterEnMinusculas = Character.toLowerCase(caracter);     //toLowerCase() para comparar con minúsculas
+             if (caracter != ' ' && caracter == caracterEnMinusculas) {         // Validar si el carácter original es una letra minúscula
+                minusculas++;
+            } else if (caracter != ' ' && caracter != caracterEnMinusculas) {   // Validar si el carácter original es una letra mayúscula
+                mayusculas++;
+            }
+        }
         String enMinusculas = texto.toLowerCase();
-        JOptionPane.showMessageDialog(rootPane, enMinusculas);
+        JOptionPane.showMessageDialog(rootPane, "Letras en Mayusculas: "+mayusculas+"\n"+
+                "Letras en Minusculas: "+minusculas+"\n"+
+                "Oracion en minusculas: "+enMinusculas);
     }
     /**
      * @param args the command line arguments
